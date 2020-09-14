@@ -43,9 +43,7 @@
 
       if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
         container.className = "unity-mobile";
-      //  config.devicePixelRatio = 1;
-		    canvas.style.width = "1280px";
-        canvas.style.height = "720px";
+        config.devicePixelRatio = 0;
       } else {
         canvas.style.width = "1280px";
         canvas.style.height = "720px";
