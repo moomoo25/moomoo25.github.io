@@ -43,10 +43,10 @@
 
       if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
         container.className = "unity-mobile";
-        config.devicePixelRatio = 0;
+        config.devicePixelRatio = 1;
       } else {
-        canvas.style.width = "1280px";
-        canvas.style.height = "720px";
+        canvas.style.width = "300px";
+        canvas.style.height = "400px";
       }
       loadingBar.style.display = "block";
 
