@@ -1,5 +1,6 @@
 body { padding: 0; margin: 0; }
-#unity-white{width: 100%; height: 100%;background: url('fullscreen-button.png') no-repeat center }
+#unity-white{position: absolute}
+#unity-white.unity-whitecanvas{width: 100%; height: 100%;background: url('fullscreen-button.png') no-repeat center }
 #unity-container { position: absolute  }
 #unity-container.unity-desktop { left: 30.5%; top: 0px; width: 600px; height: 960px  }
 #unity-container.unity-mobile { left: 60px; top: 200px; width: 860px; height: 1400px }
