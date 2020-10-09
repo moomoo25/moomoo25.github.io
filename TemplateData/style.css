@@ -4,7 +4,7 @@ body { padding: 0; margin: 0; }
 #unity-container.unity-mobile { left: 60px; top: 200px; width: 860px; height: 1400px }
 #unity-canvas {background: url('BGGame4.png') no-repeat center;background-size: cover;}
 .unity-mobile #unity-canvas { width: 100%; height: 100% }
-#unity-loading-bar { position: absolute; left: 50%; top: 800px; transform: translate(-50%, -50%); display: none }
+#unity-loading-bar { position: absolute; left: 50%; top: 1700px; transform: translate(-50%, -50%); display: none }
 #unity-logo { width: 256px; height: 200px; background: url('unity-logo-dark4.png') no-repeat center }
 #unity-progress-bar-empty { width: 256px; height: 33px; margin-top: 3px; background: url('progress-bar-empty-dark2.png') no-repeat center }
 #unity-progress-bar-full { width: 0%; height: 33px; margin-top: 3px; background: url('progress-bar-full-dark2.png') no-repeat center }
