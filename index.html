@@ -94,6 +94,9 @@
       document.body.appendChild(script);
     }
     else {
+      var container = document.querySelector("#unity-container");
+      container.className = "unity-desktop";
+
       var img = document.createElement("img");
       img.src = 'images/landing.jpg'
       document.body.appendChild(img)
