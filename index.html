@@ -1,17 +1,43 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="id">
   <head>
+    <title>The Ranch Garden – Raih hadiah nya!</title>
+    <link rel="shortcut icon" href="images/favicon.png">
+    <link rel="stylesheet" href="TemplateData/style.css">
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Unity WebGL Player | Ranchmarket</title>
-	   <style>
+    <meta name="title" content="The Ranch Garden – Raih hadiah nya!">
+    <meta name="description"
+      content="Ranch Market menghadirkan Ranch Garden! GRATIS bermain dan dapatkan HADIAH setiap hari!">
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://prize.ranchmarket.co.id">
+    <meta property="og:title" content="The Ranch Garden – Raih hadiah nya!">
+    <meta property="og:description"
+      content="Ranch Market menghadirkan Ranch Garden! GRATIS bermain dan dapatkan HADIAH setiap hari!">
+    <meta property="og:image" content="https://prize.ranchmarket.co.id/images/FB2.jpg">
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://prize.ranchmarket.co.id">
+    <meta property="twitter:title" content="The Ranch Garden – Raih hadiah nya!">
+    <meta property="twitter:description"
+      content="Ranch Market menghadirkan Ranch Garden! GRATIS bermain dan dapatkan HADIAH setiap hari!">
+    <meta property="twitter:image" content="https://prize.ranchmarket.co.id/images/FB2.jpg">
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-78919413-4"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag('js', new Date());
+      gtag('config', 'UA-78919413-4');
+    </script>
+    
+    <style>
       body { margin: 0; }
       #gameContainer {  width:100vw; height:100vh;background: url('landing2.jpg') no-repeat center;background-size: cover;}
       canvas { width: 100%; height: 100%}
     </style>
-    <link rel="shortcut icon" href="TemplateData/favicon.ico">
-    <link rel="stylesheet" href="TemplateData/style.css">
-
   </head>
   <body>
   <div id="gameContainer"></div>
@@ -29,7 +55,16 @@
         <div id="unity-build-title">Ranchmarket</div>
       </div>
     </div>
-    <script>
+    <div id="unity-footer">
+      <div id="unity-webgl-logo"></div>
+      <div id="unity-fullscreen-button"></div>
+      <div id="unity-build-title">Ranchmarket</div>
+    </div>
+  </div>
+  <script>
+
+    if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+
       var buildUrl = "Build";
       var loaderUrl = buildUrl + "/WebGlBuild.loader.js";
       var config = {
@@ -48,13 +83,9 @@
       var progressBarFull = document.querySelector("#unity-progress-bar-full");
       var fullscreenButton = document.querySelector("#unity-fullscreen-button");
 
-      if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
-        container.className = "unity-mobile";
-        config.devicePixelRatio = 1;
-      } else {
-        canvas.style.width = "600px";
-        canvas.style.height = "960px";
-      }
+      container.className = "unity-mobile";
+      config.devicePixelRatio = 1;
+
       loadingBar.style.display = "block";
 
       var script = document.createElement("script");
@@ -72,6 +103,13 @@
         });
       };
       document.body.appendChild(script);
-    </script>
-  </body>
+    }
+    else {
+      var img = document.createElement("img");
+      img.src = 'images/landing.jpg'
+      document.body.appendChild(img)
+    }
+  </script>
+</body>
+
 </html>
