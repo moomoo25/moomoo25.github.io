@@ -74,7 +74,22 @@
 
   <script>
 
-    if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+    const now = new Date();
+    if (!(now.getFullYear() >= 2020 &&
+      now.getMonth() >= 9 &&
+      now.getDate() >= 19)) {
+
+      var unityContainer = document.querySelector("#unity-container");
+      unityContainer.className = "unity-desktop";
+
+      var landingContainer = document.querySelector("#landing-container");
+      landingContainer.className = "unity-desktop";
+
+      var img = document.createElement("img");
+      img.src = 'images/comingsoon.jpg';
+      landingContainer.appendChild(img);
+    }
+    else if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
 
       var buildUrl = "Build";
       var loaderUrl = buildUrl + "/WebGlBuild.loader.js";
@@ -129,8 +144,8 @@
       landingContainer.className = "unity-desktop";
 
       var img = document.createElement("img");
-      img.src = 'images/landing.jpg'
-      landingContainer.appendChild(img)
+      img.src = 'images/landing.jpg';
+      landingContainer.appendChild(img);
     }
   </script>
 </body>
