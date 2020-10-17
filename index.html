@@ -79,80 +79,98 @@
 <script>
 
   const now = new Date();
-  if (
-    !(now.getFullYear() >= 2020
-      && now.getMonth() >= 9
-      && now.getDate() >= 19)
+
+  if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+
+    if (
+      !(now.getFullYear() >= 2020
+        && now.getMonth() >= 9
+        && now.getDate() >= 19)
       && location.host !== 'moomoo25.github.io'
-  ) {
+    ) {
 
-    var unityContainer = document.querySelector("#unity-container");
-    unityContainer.className = "unity-desktop";
+      var unityContainer = document.querySelector("#unity-container");
+      unityContainer.className = "desktop";
 
-    var landingContainer = document.querySelector("#landing-container");
-    landingContainer.className = "unity-desktop";
+      var landingContainer = document.querySelector("#landing-container");
+      landingContainer.className = "desktop";
 
-    var img = document.createElement("img");
-    img.src = 'images/comingsoon_desktop.jpg';
-    landingContainer.appendChild(img);
-  }
-  else if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+      var img = document.createElement("img");
+      img.src = 'images/comingsoon_mobile.jpg';
+      landingContainer.appendChild(img);
+    }
+    else {
 
-    var buildUrl = "Build";
-    var loaderUrl = buildUrl + "/WebGlBuild.loader.js";
-    var config = {
-      dataUrl: buildUrl + "/WebGlBuild.data",
-      frameworkUrl: buildUrl + "/WebGlBuild.framework.js",
-      codeUrl: buildUrl + "/WebGlBuild.wasm",
-      streamingAssetsUrl: "StreamingAssets",
-      companyName: "Ranch Market",
-      productName: "Ranch Garden",
-      productVersion: "1.0",
-    };
+      var buildUrl = "Build";
+      var loaderUrl = buildUrl + "/WebGlBuild.loader.js";
+      var config = {
+        dataUrl: buildUrl + "/WebGlBuild.data",
+        frameworkUrl: buildUrl + "/WebGlBuild.framework.js",
+        codeUrl: buildUrl + "/WebGlBuild.wasm",
+        streamingAssetsUrl: "StreamingAssets",
+        companyName: "Ranch Market",
+        productName: "Ranch Garden",
+        productVersion: "1.0",
+      };
 
-    var container = document.querySelector("#unity-container");
-    var canvas = document.querySelector("#unity-canvas");
-    var loadingBgImg = document.querySelector("#loading-bg-img");
-    var loadingBar = document.querySelector("#unity-loading-bar");
-    var progressBarFull = document.querySelector("#unity-progress-bar-full");
-    var fullscreenButton = document.querySelector("#unity-fullscreen-button");
+      var container = document.querySelector("#unity-container");
+      var canvas = document.querySelector("#unity-canvas");
+      var loadingBgImg = document.querySelector("#loading-bg-img");
+      var loadingBar = document.querySelector("#unity-loading-bar");
+      var progressBarFull = document.querySelector("#unity-progress-bar-full");
+      var fullscreenButton = document.querySelector("#unity-fullscreen-button");
 
-    container.className = "mobile";
-    config.devicePixelRatio = 1;
+      container.className = "mobile";
+      config.devicePixelRatio = 1;
 
-    loadingBgImg.src = "images/loading-background.png";
+      loadingBgImg.src = "images/loading-background.png";
 
-    loadingBar.style.display = "block";
+      loadingBar.style.display = "block";
 
-    var script = document.createElement("script");
-    script.src = loaderUrl;
-    script.onload = () => {
-      createUnityInstance(canvas, config, (progress) => {
-        progressBarFull.style.width = 100 * progress + "%";
-      }).then((unityInstance) => {
-        loadingBgImg.style.display = "none";
-        loadingBar.style.display = "none";
-        canvas.style.display = "block";
-        fullscreenButton.onclick = () => {
-          unityInstance.SetFullscreen(1);
-        };
-      }).catch((message) => {
-        alert(message);
-      });
-    };
-    document.body.appendChild(script);
+      var script = document.createElement("script");
+      script.src = loaderUrl;
+      script.onload = () => {
+        createUnityInstance(canvas, config, (progress) => {
+          progressBarFull.style.width = 100 * progress + "%";
+        }).then((unityInstance) => {
+          loadingBgImg.style.display = "none";
+          loadingBar.style.display = "none";
+          canvas.style.display = "block";
+          fullscreenButton.onclick = () => {
+            unityInstance.SetFullscreen(1);
+          };
+        }).catch((message) => {
+          alert(message);
+        });
+      };
+      document.body.appendChild(script);
+    }
+
   }
   else {
 
-    // 
+    // Desktop Platform
+
     var unityContainer = document.querySelector("#unity-container");
-    unityContainer.className = "unity-desktop";
+    unityContainer.className = "desktop";
 
     var landingContainer = document.querySelector("#landing-container");
-    landingContainer.className = "unity-desktop";
+    landingContainer.className = "desktop";
 
     var img = document.createElement("img");
-    img.src = 'images/landing.jpg';
+
+    if (
+      !(now.getFullYear() >= 2020
+        && now.getMonth() >= 9
+        && now.getDate() >= 19)
+      && location.host !== 'moomoo25.github.io'
+    ) {
+      img.src = 'images/comingsoon_desktop.jpg';
+    }
+    else {
+      img.src = 'images/landing.jpg';
+    }
+
     landingContainer.appendChild(img);
   }
 </script>
