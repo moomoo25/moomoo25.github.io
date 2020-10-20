@@ -90,11 +90,12 @@
     portraitMode = document.body.clientHeight > document.body.clientWidth;
   }
 
+  const t = now.getTime();
+
   if (
     !(now.getFullYear() >= 2020
       && now.getMonth() >= 9
       && now.getDate() >= 19)
-    && location.host !== 'moomoo25.github.io'
   ) {
 
     var unityContainer = document.querySelector("#unity-container");
@@ -105,20 +106,20 @@
 
     var img = document.querySelector("#landing-img");
     if (portraitMode) {
-      img.src = 'images/comingsoon_portrait.jpg';
+      img.src = `images/comingsoon_portrait.jpg?t=${t}`;
     }
     else {
-      img.src = 'images/comingsoon_landscape.jpg';
+      img.src = `images/comingsoon_landscape.jpg?t=${t}`;
     }
   }
   else if (isMobilePlatform) {
 
     var buildUrl = "Build";
-    var loaderUrl = buildUrl + "/WebGlBuild.loader.js";
+    var loaderUrl = buildUrl + `/WebGlBuild.loader.js?t=${t}`;
     var config = {
-      dataUrl: buildUrl + "/WebGlBuild.data",
-      frameworkUrl: buildUrl + "/WebGlBuild.framework.js",
-      codeUrl: buildUrl + "/WebGlBuild.wasm",
+      dataUrl: buildUrl + `/WebGlBuild.data?t=${t}`,
+      frameworkUrl: buildUrl + `/WebGlBuild.framework.js?t=${t}`,
+      codeUrl: buildUrl + `/WebGlBuild.wasm?t=${t}`,
       streamingAssetsUrl: "StreamingAssets",
       companyName: "Ranch Market",
       productName: "Ranch Garden",
@@ -135,7 +136,7 @@
     container.className = "mobile";
     config.devicePixelRatio = 1;
 
-    loadingBgImg.src = "images/loading-background.png";
+    loadingBgImg.src = `images/loading-background.png?t=${t}`;
 
     loadingBar.style.display = "block";
 
@@ -169,7 +170,7 @@
     landingContainer.className = "desktop";
 
     var img = document.querySelector("#landing-img");
-    img.src = 'images/landing.jpg';
+    img.src = `images/landing.jpg?t=${t}`;
   }
 </script>
 
