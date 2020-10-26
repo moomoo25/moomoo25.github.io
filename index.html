@@ -1,177 +1,70 @@
 <!DOCTYPE html>
-<html lang="id">
-
-<head>
-  <title>The Ranch Garden – Raih hadiah nya!</title>
-  <link rel="shortcut icon" href="images/favicon.png">
-  <link rel="stylesheet" href="TemplateData/style.css">
-  <meta charset="utf-8">
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta name="title" content="The Ranch Garden – Raih hadiah nya!">
-  <meta name="description"
-    content="Ranch Market menghadirkan Ranch Garden! GRATIS bermain dan dapatkan HADIAH setiap hari!">
-  <!-- Open Graph / Facebook -->
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://prize.ranchmarket.co.id">
-  <meta property="og:title" content="The Ranch Garden – Raih hadiah nya!">
-  <meta property="og:description"
-    content="Ranch Market menghadirkan Ranch Garden! GRATIS bermain dan dapatkan HADIAH setiap hari!">
-  <meta property="og:image" content="https://prize.ranchmarket.co.id/images/FB2.jpg">
-  <!-- Twitter -->
-  <meta property="twitter:card" content="summary_large_image">
-  <meta property="twitter:url" content="https://prize.ranchmarket.co.id">
-  <meta property="twitter:title" content="The Ranch Garden – Raih hadiah nya!">
-  <meta property="twitter:description"
-    content="Ranch Market menghadirkan Ranch Garden! GRATIS bermain dan dapatkan HADIAH setiap hari!">
-  <meta property="twitter:image" content="https://prize.ranchmarket.co.id/images/FB2.jpg">
-
-  <!-- Google Tag Manager -->
-  <script>
-    (function (w, d, s, l, i) {
-      w[l] = w[l] || []; w[l].push({
-        'gtm.start':
-          new Date().getTime(), event: 'gtm.js'
-      }); var f = d.getElementsByTagName(s)[0],
-        j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
-          'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
-    })(window, document, 'script', 'dataLayer', 'GTM-TLWMBVS');
-  </script>
-  <!-- End Google Tag Manager -->
-
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-78919413-4"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
-    gtag('config', 'UA-78919413-4');
-  </script>
-
-</head>
-
-<body>
-
-  <!-- Google Tag Manager (noscript) -->
-  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TLWMBVS" height="0" width="0"
-      style="display:none;visibility:hidden"></iframe></noscript>
-  <!-- End Google Tag Manager (noscript) -->
-
-  <div id="unity-container">
-    <canvas id="unity-canvas"></canvas>
-    <img id="loading-bg-img" />
-    <div id="unity-loading-bar">
-      <div id="unity-logo"></div>
-      <div id="unity-progress-bar-empty">
-        <div id="unity-progress-bar-full"></div>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Unity WebGL Player | Ranchmarket</title>
+    <link rel="shortcut icon" href="TemplateData/favicon.ico">
+    <link rel="stylesheet" href="TemplateData/style.css">
+  </head>
+  <body>
+    <div id="unity-container" class="unity-desktop">
+      <canvas id="unity-canvas"></canvas>
+      <div id="unity-loading-bar">
+        <div id="unity-logo"></div>
+        <div id="unity-progress-bar-empty">
+          <div id="unity-progress-bar-full"></div>
+        </div>
+      </div>
+      <div id="unity-footer">
+        <div id="unity-webgl-logo"></div>
+        <div id="unity-fullscreen-button"></div>
+        <div id="unity-build-title">Ranchmarket</div>
       </div>
     </div>
-    <div id="unity-footer">
-      <div id="unity-webgl-logo"></div>
-      <div id="unity-fullscreen-button"></div>
-      <div id="unity-build-title">The Ranch Garden – Raih hadiah nya!</div>
-    </div>
-  </div>
+    <script>
+      var buildUrl = "Build";
+      var loaderUrl = buildUrl + "/FacebookWebgl.loader.js";
+      var config = {
+        dataUrl: buildUrl + "/FacebookWebgl.data",
+        frameworkUrl: buildUrl + "/FacebookWebgl.framework.js",
+        codeUrl: buildUrl + "/FacebookWebgl.wasm",
+        streamingAssetsUrl: "StreamingAssets",
+        companyName: "DefaultCompany",
+        productName: "Ranchmarket",
+        productVersion: "1.0",
+      };
 
-  <div id="landing-container">
-    <img id="landing-img" />
-  </div>
+      var container = document.querySelector("#unity-container");
+      var canvas = document.querySelector("#unity-canvas");
+      var loadingBar = document.querySelector("#unity-loading-bar");
+      var progressBarFull = document.querySelector("#unity-progress-bar-full");
+      var fullscreenButton = document.querySelector("#unity-fullscreen-button");
 
-</body>
+      if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+        container.className = "unity-mobile";
+        config.devicePixelRatio = 1;
+      } else {
+        canvas.style.width = "600px";
+        canvas.style.height = "960px";
+      }
+      loadingBar.style.display = "block";
 
-<script>
-
-  const now = new Date();
-  const isMobilePlatform = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-  let portraitMode;
-  if (isMobilePlatform) {
-    portraitMode = window.screen.height > window.screen.width;
-  }
-  else {
-    portraitMode = document.body.clientHeight > document.body.clientWidth;
-  }
-
-  const t = now.getTime();
-
-  if (
-    !(now.getFullYear() >= 2020
-      && now.getMonth() >= 9
-      && now.getDate() >= 19)
-  ) {
-
-    var unityContainer = document.querySelector("#unity-container");
-    unityContainer.className = "desktop";
-
-    var landingContainer = document.querySelector("#landing-container");
-    landingContainer.className = "desktop";
-
-    var img = document.querySelector("#landing-img");
-    if (portraitMode) {
-      img.src = `images/comingsoon_portrait.jpg?t=${t}`;
-    }
-    else {
-      img.src = `images/comingsoon_landscape.jpg?t=${t}`;
-    }
-  }
-  else if (isMobilePlatform) {
-
-    var buildUrl = "Build";
-    var loaderUrl = buildUrl + `/WebGlBuild.loader.js?t=${t}`;
-    var config = {
-      dataUrl: buildUrl + `/WebGlBuild.data?t=${t}`,
-      frameworkUrl: buildUrl + `/WebGlBuild.framework.js?t=${t}`,
-      codeUrl: buildUrl + `/WebGlBuild.wasm?t=${t}`,
-      streamingAssetsUrl: "StreamingAssets",
-      companyName: "Ranch Market",
-      productName: "Ranch Garden",
-      productVersion: "1.0",
-    };
-
-    var container = document.querySelector("#unity-container");
-    var canvas = document.querySelector("#unity-canvas");
-    var loadingBgImg = document.querySelector("#loading-bg-img");
-    var loadingBar = document.querySelector("#unity-loading-bar");
-    var progressBarFull = document.querySelector("#unity-progress-bar-full");
-    var fullscreenButton = document.querySelector("#unity-fullscreen-button");
-
-    container.className = "mobile";
-    config.devicePixelRatio = 1;
-
-    loadingBgImg.src = `images/loading-background.png?t=${t}`;
-
-    loadingBar.style.display = "block";
-
-    var script = document.createElement("script");
-    script.src = loaderUrl;
-    script.onload = () => {
-      createUnityInstance(canvas, config, (progress) => {
-        progressBarFull.style.width = 100 * progress + "%";
-      }).then((unityInstance) => {
-        loadingBgImg.style.display = "none";
-        loadingBar.style.display = "none";
-        canvas.style.display = "block";
-        fullscreenButton.onclick = () => {
-          unityInstance.SetFullscreen(1);
-        };
-      }).catch((message) => {
-        alert(message);
-      });
-    };
-    document.body.appendChild(script);
-
-  }
-  else {
-
-    // Desktop Platform
-
-    var unityContainer = document.querySelector("#unity-container");
-    unityContainer.className = "desktop";
-
-    var landingContainer = document.querySelector("#landing-container");
-    landingContainer.className = "desktop";
-
-    var img = document.querySelector("#landing-img");
-    img.src = `images/landing.jpg?t=${t}`;
-  }
-</script>
-
+      var script = document.createElement("script");
+      script.src = loaderUrl;
+      script.onload = () => {
+        createUnityInstance(canvas, config, (progress) => {
+          progressBarFull.style.width = 100 * progress + "%";
+        }).then((unityInstance) => {
+          loadingBar.style.display = "none";
+          fullscreenButton.onclick = () => {
+            unityInstance.SetFullscreen(1);
+          };
+        }).catch((message) => {
+          alert(message);
+        });
+      };
+      document.body.appendChild(script);
+    </script>
+  </body>
 </html>
