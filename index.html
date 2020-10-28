@@ -152,7 +152,6 @@
         fullscreenButton.onclick = () => {
           unityInstance.SetFullscreen(1);
         };
-        throw new Error('Mock error')
       }).catch((message) => {
         const confirmToRefreshPage = confirm(`Please reload web page. There is a expected issue happened while loading the game.\n${message}`);
         if (confirmToRefreshPage) {
