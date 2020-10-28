@@ -157,7 +157,6 @@
           unityInstance.SetFullscreen(1);
         };
         const reloadTime = 3_600_000 * 12 /* hours */;
-        alert('Reload time = ' + reloadTime);
         setTimeout(() => {
 
           const confirmToRefreshPage = confirm(`Please reload web page. There might be a newer version of game.`);
@@ -165,7 +164,7 @@
           location.reload(true);
         }
 
-        }, 10 * 1000);
+        }, reloadTime);
         
       }).catch((message) => {
 
