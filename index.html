@@ -81,6 +81,7 @@
 <script>
 
   const now = new Date();
+  const launchDate = new Date(2020, 9, 19);
   const isMobilePlatform = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
   let portraitMode;
   if (isMobilePlatform) {
@@ -92,11 +93,7 @@
 
   const t = now.getTime();
 
-  if (
-    !(now.getFullYear() >= 2020
-      && now.getMonth() >= 9
-      && now.getDate() >= 19)
-  ) {
+  if (now < launchDate) {
 
     var unityContainer = document.querySelector("#unity-container");
     unityContainer.className = "desktop";
