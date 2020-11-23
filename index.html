@@ -111,68 +111,80 @@
   }
   else if (isMobilePlatform) {
 
-    var buildUrl = "Build";
-    var loaderUrl = buildUrl + `/WebGlBuild.loader.js?t=${t}`;
-    var config = {
-      dataUrl: buildUrl + `/WebGlBuild.data?t=${t}`,
-      frameworkUrl: buildUrl + `/WebGlBuild.framework.js?t=${t}`,
-      codeUrl: buildUrl + `/WebGlBuild.wasm?t=${t}`,
-      streamingAssetsUrl: "StreamingAssets",
-      companyName: "Ranch Market",
-      productName: "Ranch Garden",
-      productVersion: "1.0",
-    };
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has('share_code')) {
 
-    var container = document.querySelector("#unity-container");
-    var canvas = document.querySelector("#unity-canvas");
-    var loadingBgImg = document.querySelector("#loading-bg-img");
-    var loadingBar = document.querySelector("#unity-loading-bar");
-    var progressBarFull = document.querySelector("#unity-progress-bar-full");
-    var fullscreenButton = document.querySelector("#unity-fullscreen-button");
+      const searchParams = new URLSearchParams()
+      searchParams.set('utm_source', 'Whatsapp_Share')
+      searchParams.set('utm_medium', 'referral')
+      searchParams.set('utm_campaign', 'Game')
+      const redirectToUrl = `${window.location.href.split('?')[0]}?${searchParams.toString()}`
+      window.location.replace(redirectToUrl)
+    }
+    else {
+      var buildUrl = "Build";
+      var loaderUrl = buildUrl + `/WebGlBuild.loader.js?t=${t}`;
+      var config = {
+        dataUrl: buildUrl + `/WebGlBuild.data?t=${t}`,
+        frameworkUrl: buildUrl + `/WebGlBuild.framework.js?t=${t}`,
+        codeUrl: buildUrl + `/WebGlBuild.wasm?t=${t}`,
+        streamingAssetsUrl: "StreamingAssets",
+        companyName: "Ranch Market",
+        productName: "Ranch Garden",
+        productVersion: "1.0",
+      };
 
-    container.className = "mobile";
-    config.devicePixelRatio = 1;
+      var container = document.querySelector("#unity-container");
+      var canvas = document.querySelector("#unity-canvas");
+      var loadingBgImg = document.querySelector("#loading-bg-img");
+      var loadingBar = document.querySelector("#unity-loading-bar");
+      var progressBarFull = document.querySelector("#unity-progress-bar-full");
+      var fullscreenButton = document.querySelector("#unity-fullscreen-button");
 
-    loadingBgImg.src = `images/loading-background.png?t=${t}`;
+      container.className = "mobile";
+      config.devicePixelRatio = 1;
 
-    loadingBar.style.display = "block";
+      loadingBgImg.src = `images/loading-background.png?t=${t}`;
 
-    var script = document.createElement("script");
-    script.src = loaderUrl;
-    script.onload = () => {
+      loadingBar.style.display = "block";
 
-      createUnityInstance(canvas, config, (progress) => {
+      var script = document.createElement("script");
+      script.src = loaderUrl;
+      script.onload = () => {
 
-        progressBarFull.style.width = 100 * progress + "%";
+        createUnityInstance(canvas, config, (progress) => {
 
-      }).then((unityInstance) => {
+          progressBarFull.style.width = 100 * progress + "%";
 
-        loadingBgImg.style.display = "none";
-        loadingBar.style.display = "none";
-        canvas.style.display = "block";
-        fullscreenButton.onclick = () => {
-          unityInstance.SetFullscreen(1);
-        };
-        const reloadTime = 3_600_000 * 12 /* hours */;
-        setTimeout(() => {
+        }).then((unityInstance) => {
 
-          const confirmToRefreshPage = confirm(`Please reload web page. There might be a newer version of game.`);
-        if (confirmToRefreshPage) {
-          location.reload(true);
-        }
+          loadingBgImg.style.display = "none";
+          loadingBar.style.display = "none";
+          canvas.style.display = "block";
+          fullscreenButton.onclick = () => {
+            unityInstance.SetFullscreen(1);
+          };
+          const reloadTime = 3_600_000 * 12 /* hours */;
+          setTimeout(() => {
 
-        }, reloadTime);
-        
-      }).catch((message) => {
+            const confirmToRefreshPage = confirm(`Please reload web page. There might be a newer version of game.`);
+            if (confirmToRefreshPage) {
+              location.reload(true);
+            }
 
-        const confirmToRefreshPage = confirm(`Please reload web page. There is a expected issue happened while loading the game.\n${message}`);
-        if (confirmToRefreshPage) {
-          location.reload(true);
-        }
+          }, reloadTime);
 
-      });
-    };
-    document.body.appendChild(script);
+        }).catch((message) => {
+
+          const confirmToRefreshPage = confirm(`Please reload web page. There is a expected issue happened while loading the game.\n${message}`);
+          if (confirmToRefreshPage) {
+            location.reload(true);
+          }
+
+        });
+      };
+      document.body.appendChild(script);
+    }
 
   }
   else {
