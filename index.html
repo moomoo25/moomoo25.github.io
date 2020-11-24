@@ -128,9 +128,9 @@
         url: `${window.location.protocol}//${apiEndpoint}/api/shares/reward`,
         method: 'POST',
         contentType: 'application/json',
-        data: {
+        data: JSON.stringify({
           shareCode
-        },
+        }),
         dataType: 'json',
         timeout: 0
       })
