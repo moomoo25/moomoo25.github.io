@@ -113,19 +113,18 @@
   }
   else if (isMobilePlatform) {
 
-    debugger
     const urlParams = new URLSearchParams(window.location.search);
     if (urlParams.has('share_code')) {
 
       const shareCode = urlParams.get('share_code')
 
-      let apiEndpoint = 'prize-api-test.memofive.com'
+      let apiHost = 'prize-api-test.memofive.com'
       if (window.location.host === 'prize.ranchmarket.co.id') {
-        apiEndpoint = 'prize-api.memofive.com'
+        apiHost = 'prize-api.memofive.com'
       }
 
       $.ajax({
-        url: `${window.location.protocol}//${apiEndpoint}/api/shares/reward`,
+        url: `${window.location.protocol}//${apiHost}/api/shares/reward`,
         method: 'POST',
         contentType: 'application/json',
         data: JSON.stringify({
